@@ -1,8 +1,4 @@
-﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
-
-// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
-
-Shader "_MyShader/SimpleBump" {
+﻿Shader "_MyShader/SimpleBump" {
     Properties { 
         _Tint ("Tint Color", Color) = (1,1,1,1) 
         _MainTex ("Main Texture", 2D) = "white" {}
