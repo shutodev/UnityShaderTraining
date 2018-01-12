@@ -1,11 +1,15 @@
-﻿Shader "_MyShader/SimpleBump" {
-    Properties { 
+﻿Shader "_MyShader/SimpleBump"
+{
+    Properties
+    { 
         _Tint ("Tint Color", Color) = (1,1,1,1) 
         _MainTex ("Main Texture", 2D) = "white" {}
         _BumpTex ("Bump Texture", 2D) = "white" {}
     } 
-    SubShader {
-        Pass {
+    SubShader
+    {
+        Pass
+        {
             Tags { "LightMode"="ForwardBase" }
             CGPROGRAM
             #pragma vertex vert
@@ -16,14 +20,16 @@
             sampler2D _MainTex;
             sampler2D _BumpTex;
 
-            struct appdata {
+            struct appdata
+            {
                 float4 vertex : POSITION;
                 float2 texcoord : TEXCOORD0;
                 float4 normal : NORMAL;
                 float4 tangent : TANGENT;
             };
             
-            struct v2f { 
+            struct v2f
+            { 
                 float4 pos : SV_POSITION;
                 float2 uv : TEXCOORD0;
                 float3 normal : TEXCOORD1;
@@ -31,7 +37,8 @@
                 float3 bitangent : TEXCOORD3;
             };
 
-            v2f vert(appdata v) {
+            v2f vert(appdata v)
+            {
                 v2f o; 
                 o.pos = UnityObjectToClipPos(v.vertex);
                 o.uv = v.texcoord;
@@ -42,7 +49,8 @@
                 return o; 
             }
 
-            fixed4 frag(v2f i) : SV_Target {
+            fixed4 frag(v2f i) : SV_Target
+            {
                 i.normal = normalize(i.normal);
                 float3x3 rotation = float3x3(i.tangent, i.bitangent, i.normal);
                 float3 normalLocal = UnpackNormal(tex2D(_BumpTex, i.uv));

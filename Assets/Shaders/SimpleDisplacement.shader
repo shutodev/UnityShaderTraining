@@ -1,5 +1,7 @@
-﻿Shader "_MyShader/SimpleDisplacement"{
-    Properties { 
+﻿Shader "_MyShader/SimpleDisplacement"
+{
+    Properties
+    { 
         _Tint ("Tint Color", Color) = (1,1,1,1)
         _DisplacementX ("DisplacementX", Range(-1, 1)) = 0
         _DisplacementY ("DisplacementY", Range(-1, 1)) = 0
@@ -8,9 +10,11 @@
         _MainTex ("Main Texture", 2D) = "white" {}
         _MapTex ("Map Texture", 2D) = "white" {}
     } 
-    SubShader {
+    SubShader
+    {
         Blend SrcAlpha OneMinusSrcAlpha
-        Pass {
+        Pass
+        {
             Tags { "LightMode"="ForwardBase" }
             CGPROGRAM
             #pragma vertex vert
@@ -25,26 +29,31 @@
             float4 _MainTex_ST;
             float4 _MapTex_ST;
 
-            struct appdata {
+            struct appdata
+            {
                 float4 vertex : POSITION;
                 float2 texcoord : TEXCOORD0;
                 float4 normal : NORMAL; 
             };
-            struct v2f { 
+
+            struct v2f
+            { 
                 float4 pos : SV_POSITION;
                 float2 uv : TEXCOORD0;
                 float3 normal : TEXCOORD1; 
             };
 
-            v2f vert(appdata v) {
+            v2f vert(appdata v)
+            {
                 v2f o; 
                 o.pos = UnityObjectToClipPos(v.vertex); 
                 o.uv = v.texcoord; 
                 o.normal = UnityObjectToWorldNormal(v.normal);
                 return o; 
-            } 
+            }
 
-            fixed4 frag(v2f i) : SV_Target { 
+            fixed4 frag(v2f i) : SV_Target
+            { 
                 half3 normalDir = normalize(i.normal); 
                 half3 lightDir = normalize(_WorldSpaceLightPos0.xyz);
                 half NdotL = max(0, dot(normalDir, lightDir)); 
